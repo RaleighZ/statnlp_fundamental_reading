@@ -8,6 +8,7 @@
 - Jocab Eisenstein, Natural Language Processing (Draft), 2018, link: https://github.com/jacobeisenstein/gt-nlp-class/blob/master/notes/eisenstein-nlp-notes.pdf
 - Dan Jurafsky, 	
 Speech and Language Processing (Draft), 2018,  link: https://web.stanford.edu/~jurafsky/slp3/
+- *如果有好的书籍推荐，请添加到参考书籍，并更新此栏目信息
 ## 链接
 - [Note 格式](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/%E8%AF%B4%E6%98%8E/NOTE%E6%A0%BC%E5%BC%8F.md)
 - [讲解流程](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/%E8%AF%B4%E6%98%8E/%E8%AE%B2%E8%A7%A3%E6%B5%81%E7%A8%8B.md)
