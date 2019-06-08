@@ -1,6 +1,6 @@
 # statnlp fundamental reading
 ## Intro
-这是一个statnlp的内部的nlp基础学习兴趣小组
+This is a reading group for both fundamental and cutting edge NLP research.
 ## Course Materials
 - ['Neural Network for NLP' by Neubig](http://phontron.com/class/nn4nlp2019/)
 ## Reading Materials
