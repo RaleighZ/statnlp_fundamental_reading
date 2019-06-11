@@ -2,6 +2,7 @@
 ## Course Information
 - Video: https://www.youtube.com/watch?v=0pycTk-JFk8
 - Slide: http://www.phontron.com/class/nn4nlp2019/assets/slides/nn4nlp-02-lm.pdf
+- Materials: [Chapter 9 in Neural Network Methods for Natural Language Processing by Yoav Goldberg](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Language%20Model/Goldberg_ch9_Language%20Model.pdf)
 ## Motivation
 - Q1: How to decide which sentence is natural, which is not? Or how to judge a sentence is good or not?
 Ans: possibility, to evaluate a sentence by calculating its possibility
