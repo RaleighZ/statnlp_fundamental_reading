@@ -1,8 +1,8 @@
 # NOTE Format
 ## Content
 - Purpose/Motivation （3-5 min <sup>1</sup>）
-you may include 'What kind of problems can this topic/task address' (you'd better give a detailed description, with which we can easily assosiate it with related task)
-	- For example, the language model is proposed to calculate/assign probabiltiy to a given sentence，or predict a possible next word over a word sequence. We can apply the language model to machine translation ...。
+you may include 'What kind of problems can this topic/task address' (you'd better give description in details, with which we can easily assosiate it with related task)
+	- For example, the language model is proposed to calculate/assign probabiltiy to a given sentence，or predict a possible next word over a word sequence. We can apply the language model to machine translation ...
 
 - Definition of Problem （5-7 min）
 要解决的问题的具体表现形式
