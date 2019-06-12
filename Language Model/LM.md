@@ -62,7 +62,7 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
       - word embed can encode context information; simliar context yields similar embedding and thus can assign high probability to unseen sentences which have similar context.
       - n -> n+1, ![](https://latex.codecogs.com/gif.latex?\boldsymbol{W}^{\mathbf{1}}): ![](https://latex.codecogs.com/gif.latex?k&space;\cdot&space;d_{\mathrm{w}}&space;\times&space;d_{\mathrm{hid}}) -> ![](https://latex.codecogs.com/gif.latex?(k&plus;1)&space;\cdot&space;d_{\mathrm{w}}&space;\times&space;d_{\mathrm{hid}})
 ## Related SoTA Work
-- [ELMo (**E**mbeddings from **L**anguage **Mo**dels)](https://aclweb.org/anthology/N18-1202)
+- [ELMo](https://aclweb.org/anthology/N18-1202)(**E**mbeddings from **L**anguage **Mo**dels)
     - Generate General **Pre-trained** **Contextualized** Word Representation from LM
         - Contextualized
         - Why LM
@@ -81,7 +81,7 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
         ![](https://latex.codecogs.com/gif.latex?\begin{array}{l}{\sum_{k=1}^{N}\left(\log&space;p\left(t_{k}&space;|&space;t_{1},&space;\ldots,&space;t_{k-1}&space;;&space;\Theta_{x},&space;\vec{\Theta}_{L&space;S&space;T&space;M},&space;\Theta_{s}\right)\right.}&space;\\&space;{\quad&plus;\log&space;p\left(t_{k}&space;|&space;t_{k&plus;1},&space;\ldots,&space;t_{N}&space;;&space;\Theta_{x},&space;\widetilde{\Theta}_{L&space;S&space;T&space;M},&space;\Theta_{s}\right)&space;)}\end{array})
         - Deep: stacked bi-LSTM
      - Leakage issue in Deep Bi-directional LM?
-- [BERT (**B**idirectional **E**ncoder **R**epresentations from **T**ransformers)](https://arxiv.org/pdf/1810.04805.pdf)
+- [BERT](https://arxiv.org/pdf/1810.04805.pdf)(**B**idirectional **E**ncoder **R**epresentations from **T**ransformers)
     - [Transformer](https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf)<sup>3</sup>
     - Masked LM
         - Masked some words out in a sentence and predict it
