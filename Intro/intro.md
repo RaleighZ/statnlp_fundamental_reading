@@ -1,4 +1,7 @@
 # Introduction
+# Course Information
+Video: https://www.youtube.com/watch?v=pmcXgNTuHnk
+Slide: http://www.phontron.com/class/nn4nlp2019/assets/slides/nn4nlp-01-intro.pdf
 ## Background
 Q1: Why we choose Neural Networks(NNs) as tools for NLP
 
