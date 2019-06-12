@@ -62,13 +62,46 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
       - word embed can encode context information; simliar context yields similar embedding and thus can assign high probability to unseen sentences which have similar context.
       - n->n+1, ![](https://latex.codecogs.com/gif.latex?\boldsymbol{W}^{\mathbf{1}}): ![](https://latex.codecogs.com/gif.latex?k&space;\cdot&space;d_{\mathrm{w}}&space;\times&space;d_{\mathrm{hid}})->![](https://latex.codecogs.com/gif.latex?(k&plus;1)&space;\cdot&space;d_{\mathrm{w}}&space;\times&space;d_{\mathrm{hid}})
 ## Related SoTA Work
-- [ELMO](https://aclweb.org/anthology/N18-1202)
-- [Bert](https://arxiv.org/pdf/1810.04805.pdf)
+- [ELMo](https://aclweb.org/anthology/N18-1202)
+    - Generate General **Pre-trained** **Contextualized** Word Representation from LM
+        - Contextualized
+        - Why LM
+            - 'Unsupervised' Task, does not require any human annotations
+            - Nearly Unlimited data
+            - Models trained on the large corpus can generate sentences of an unexpectedly high quality
+          
+    
+    - Model Details
+    ![image](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Language%20Model/taglm.png)
+        - char-CNN: mitigate OOV
+        - stacked bi-LSTM
+        - tie parameter in token representation and Softmax layer in the forward and backward directions
+    - Deep Bi-directional LM
+        - bi-directional LM:
+        ![](https://latex.codecogs.com/gif.latex?\begin{array}{l}{\sum_{k=1}^{N}\left(\log&space;p\left(t_{k}&space;|&space;t_{1},&space;\ldots,&space;t_{k-1}&space;;&space;\Theta_{x},&space;\vec{\Theta}_{L&space;S&space;T&space;M},&space;\Theta_{s}\right)\right.}&space;\\&space;{\quad&plus;\log&space;p\left(t_{k}&space;|&space;t_{k&plus;1},&space;\ldots,&space;t_{N}&space;;&space;\Theta_{x},&space;\widetilde{\Theta}_{L&space;S&space;T&space;M},&space;\Theta_{s}\right)&space;)}\end{array})
+        - Deep: stacked bi-LSTM
+     - Leakage issue in Deep Bi-directional LM?
+- [BERT](https://arxiv.org/pdf/1810.04805.pdf)
+    - [Transformer](https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf)<sup>3</sup>
+    - Masked LM
+        - Masked some words out in a sentence and predict it
+        - Trick
+            - not all words with [MASK] will be merely represented by [MASK]. Instead, 10 percent of words [MASK] will be shown in their original form, like 'dog' for 'dog', 20 percent of them will be replaced by random word, i.e. 'apple' for 'dog' and the others remain [MASK]. 
+            - this training tricks mitigate the **unintended bias** resulting from special MARK. That is to say, similar tricks can be reused if we have to introduce special mark in the model
+    - Next sentence prediction
+        - text-pair classification, which determine whether sentence A is followed by sentence B, semantically or logically
+        - When choosing the sentences A and B for each pretraining example, 50% of the time B is the actual next sentence that follows A, and 50% of the time it is a random sentence from the corpus.
+    - Model Details
+    ![](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Language%20Model/bert.png)
+        - WordPiece embeddings
+        - learned positional embeddings
+        - Stacked Tranformer encoder
+        - Trained with masked LM and next sentence prediction
 
 ## Appendix
 - Neural Networks Training tricks
     - Shuffling data：reduce bias from the order of training data
-    - Optimization methods issues <sup>2</sup>
+    - Optimization methods issues <sup>3</sup>
         - SGD with momentum
         - Adam
     - Early stopping and learning decay
@@ -80,4 +113,5 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
         - "Should use learning rate decay"
 ## Useful Links
 1. Bengio et al., A Neural Probabilistic Language Model, 2013: http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf
-2. An overview of gradient descent optimization algorithms: http://ruder.io/optimizing-gradient-descent/
+2. Vaswani et al., Attention is All You Need, 2017: https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf
+3. An overview of gradient descent optimization algorithms: http://ruder.io/optimizing-gradient-descent/
