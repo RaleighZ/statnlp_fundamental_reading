@@ -16,12 +16,12 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
 ![](https://latex.codecogs.com/gif.latex?\mathrm&space;{P}&space;(X_{n},\ldots&space;,X_{1})=\mathrm&space;{P}&space;(X_{n}|X_{n-1},\ldots&space;,X_{1})\cdot&space;\mathrm&space;{P}&space;(X_{n-1},\ldots&space;,X_{1}))
 - [Markov Property](https://en.wikipedia.org/wiki/Markov_property)
 - [Entropy Rate]()
-    - the **entropy rate** or **source information rate** of a [stochastic process](https://en.wikipedia.org/wiki/Stochastic_process "Stochastic process") is, informally, the time density of the average information in a stochastic process.
+    - the **entropy rate** of a [stochastic process](https://en.wikipedia.org/wiki/Stochastic_process "Stochastic process") is, informally, the time density of the average information in a stochastic process.
     - ![](https://latex.codecogs.com/gif.latex?H(X)&space;=&space;\lim_{n&space;\to&space;\infty}&space;\frac{1}{n}&space;H(X_1,&space;X_2,&space;\dots&space;X_n))
 - [Cross Entropy](https://en.wikipedia.org/wiki/Cross_entropy): 
     - ![](https://latex.codecogs.com/gif.latex?H(p,q)=\operatorname&space;{E}&space;_{p}[-\log&space;q])
     - In classification problems, maximizing the likelihood is the same as minimizing the cross entropy.
-    - log Likelihood: ![](https://latex.codecogs.com/gif.latex?log\prod&space;_{i}q_{i}^{Np_{i}}&space;=&space;N\sum&space;_{i}p_{i}\log&space;q_{i}&space;=&space;N&space;H(p,&space;q))
+    - Log likelihood: ![](https://latex.codecogs.com/gif.latex?log\prod&space;_{i}q_{i}^{Np_{i}}&space;=&space;N\sum&space;_{i}p_{i}\log&space;q_{i}&space;=&space;N&space;H(p,&space;q))
 
 
 
@@ -39,7 +39,7 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
     - Esimation of the conditional probability
   - Some issues
     - The sparse distribution of features
-    - Probability of some features will be 0,
+    - Probability of some features will be 0
     - Smoothing: to solve the zero count issue
   - Weakness
     - Cannot handle long-term dependency because the window of context is limited (n)
@@ -49,9 +49,9 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
 - Neural models
     - Try to address 
         - Similar words issues: by word embeddings
-        - feature explosion issue: 
-          - number of features increases polynomially in n-gram model: |V|^n
-          - number of parameters incresese linearly with n
+        - Feature explosion issue: 
+          - Number of features increases polynomially in n-gram model: |V|^n
+          - Number of parameters incresese linearly with n
     - A Neural Probabilistic Language Model by Bengio et al. <sup>1</sup>
       - ![](https://latex.codecogs.com/gif.latex?\hat{y}=P\left(w_{i}&space;|&space;w_{1&space;:&space;k}\right)=L&space;M\left(w_{1&space;:&space;k}\right)=\operatorname{softmax}\left(h&space;W^{2}&plus;b^{2}\right))
       - ![](https://latex.codecogs.com/gif.latex?\boldsymbol{h}=g\left(\boldsymbol{x}&space;\boldsymbol{W}^{\mathbf{1}}&plus;\boldsymbol{b}^{\mathbf{1}}\right))
@@ -60,7 +60,7 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
       - ![](https://latex.codecogs.com/gif.latex?w_{i}&space;\in&space;V&space;\quad&space;E&space;\in&space;\mathbb{R}^{|V|&space;\times&space;d_{w}}&space;\quad&space;\boldsymbol{W}^{\mathbf{1}}&space;\in&space;\mathbb{R}^{k&space;\cdot&space;d_{w}&space;\times&space;d_{\mathrm{hid}}})
     - How
       - word embed can encode context information; simliar context yields similar embedding and thus can assign high probability to unseen sentences which have similar context.
-      - n->n+1, ![](https://latex.codecogs.com/gif.latex?\boldsymbol{W}^{\mathbf{1}}): ![](https://latex.codecogs.com/gif.latex?k&space;\cdot&space;d_{\mathrm{w}}&space;\times&space;d_{\mathrm{hid}})->![](https://latex.codecogs.com/gif.latex?(k&plus;1)&space;\cdot&space;d_{\mathrm{w}}&space;\times&space;d_{\mathrm{hid}})
+      - n -> n+1, ![](https://latex.codecogs.com/gif.latex?\boldsymbol{W}^{\mathbf{1}}): ![](https://latex.codecogs.com/gif.latex?k&space;\cdot&space;d_{\mathrm{w}}&space;\times&space;d_{\mathrm{hid}}) -> ![](https://latex.codecogs.com/gif.latex?(k&plus;1)&space;\cdot&space;d_{\mathrm{w}}&space;\times&space;d_{\mathrm{hid}})
 ## Related SoTA Work
 - [ELMo](https://aclweb.org/anthology/N18-1202)
     - Generate General **Pre-trained** **Contextualized** Word Representation from LM
@@ -86,10 +86,10 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
     - Masked LM
         - Masked some words out in a sentence and predict it
         - Trick
-            - not all words with [MASK] will be merely represented by [MASK]. Instead, 10 percent of words [MASK] will be shown in their original form, like 'dog' for 'dog', 20 percent of them will be replaced by random word, i.e. 'apple' for 'dog' and the others remain [MASK]. 
-            - this training tricks mitigate the **unintended bias** resulting from special MARK. That is to say, similar tricks can be reused if we have to introduce special mark in the model
+            - Not all words with [MASK] will be merely represented by [MASK]. Instead, 10 percent of words [MASK] will be shown in their original form, like 'dog' for 'dog', 20 percent of them will be replaced by random word, i.e. 'apple' for 'dog' and the others remain [MASK]. 
+            - This training tricks mitigate the **unintended bias** resulting from special mark. That is to say, similar tricks can be reused if we have to introduce special mark in the model
     - Next sentence prediction
-        - text-pair classification, which determine whether sentence A is followed by sentence B, semantically or logically
+        - Text-pair classification, which determines whether sentence A is followed by sentence B, semantically or logically
         - When choosing the sentences A and B for each pretraining example, 50% of the time B is the actual next sentence that follows A, and 50% of the time it is a random sentence from the corpus.
     - Model Details
     ![](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Language%20Model/bert.png)
