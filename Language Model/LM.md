@@ -35,7 +35,7 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
         - Perplexity is equal to entropy rate
 - n-gram LM
     
-    - N-order Markov Assumption: ![](https://latex.codecogs.com/gif.latex?P\left(w_{i&plus;1}&space;|&space;w_{1&space;:&space;i}\right)&space;\approx&space;P\left(w_{i&plus;1}&space;|&space;w_{i-k&space;:&space;i}\right))
+    - N-order Markov Assumption: ![](https://latex.codecogs.com/gif.latex?P\left(w_{i&plus;1}&space;|&space;w_{1&space;:&space;i}\right)&space;\approx&space;P\left(w_{i&plus;1}&space;|&space;w_{i-n&space;:&space;i}\right))
     - Esimation of the conditional probability
   - Some issues
     - The sparse distribution of features
