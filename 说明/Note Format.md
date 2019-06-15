@@ -1,22 +1,33 @@
 # NOTE Format
 ## Content
 - Purpose/Motivation （3-5 min <sup>1</sup>）
-you may include 'What kind of problems can this topic/task address' (you'd better give description in details, with which we can easily assosiate it with related task)
-	- For example, the language model is proposed to calculate/assign probabiltiy to a given sentence，or predict a possible next word over a word sequence. We can apply the language model to machine translation ...
+You may include 'What kind of problems can this topic/task address' (you'd better give descriptions in details, with which we can easily associate it with related tasks)
+    - For example, the language model is proposed to calculate/assign a probability to a given sentence，or predict a possible next word over a word sequence. We can apply the language model to machine translation ...
 
 - Definition of Problem （5-7 min）
-要解决的问题的具体表现形式
-	- 例如parsing，给定一个句子作为输入（句子的定义是什么，输入的形式/格式是什么），需要构造一个模型，输出一个句法树
+The description of the task in details. You may include the formal description/definition of problems and it would be better to show it in rigid mathematical forms.
+    - For example, what is the format of input and what is expected to output from the model in the parsing task.
 
 - Definition of Concept （10-20 min）
-后续讲解中所需要了解的必要基本概念。因为概念的理解关乎到后面task或者是模型的理解，所以我们需要确保概念能被正确的传达。建议：
-	- 写note的人在这里根据基础概念设置一些关键问题，让听课的人回答，
-	- 或者设置QA答疑环节，以确保概念能被正确的传达
+In this part, you may cover the critical concepts which are important to the following teaching. Meanwhile, it would better for you to set up some quizzes or Q&A sessions to test whether listeners have already mastered the concepts. Specifically, you can:
+    - Write some problems related to the concepts
+    - Leave some time to the listens when they can ask questions about these concepts.
+What are the critical concepts?
+Critical concepts maybe those concepts, without which listeners may get confused about the contents you teach. For example, you may mention Markov property and some information theory concepts, like entropy, cross entropy and etc., when you teach language model. If you introduce those concepts in advance, listeners may get confused about the definition of the probability of an LM. 
 
-- 经典方法：解决问题的方法 或者 算法流程 或者模型 （30-35min）
-同上需要设置问答环节
 
-- SOTA 环节 （30-35min）
+- Conventional Methods （30-35min）
+You may include the details of the model/algorithms of conventional methods that address the aforementioned problems.
+You'd better set up Q&A sessions as mentioned before. 
+
+- State-of-the-art(SoTA) Methods （30-35min）
+In this part, you may include some typical, need-to-read SoTA models on this topic. 
+What should be covered when presenting SoTA models?
+    - Motivation
+    - Methods
+    - Some aspects deserve sharing (in your opinion)
+    - Some problems or questions you find when you read those papers and  deserve discussing (in your opinion)
 
 ## Remarks
-1: The time length here refers to suggested time length for teaching. The writer of the note can take this refer 这里的时间长度是一个建议的讲解时间长度，note编写者可以参考这个时间长度编写合适的内容量，下同
+1: The time length here refers to the suggested time length for teaching. The writer of the note can take this time as a reference for the amount of content you prepare in this part. (The purpose of the time is the same in following parts) 
+
