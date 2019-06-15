@@ -2,7 +2,7 @@
 ## Course Information
 - Video: https://www.youtube.com/watch?v=0pycTk-JFk8
 - Slide: http://www.phontron.com/class/nn4nlp2019/assets/slides/nn4nlp-02-lm.pdf
-- Materials: [Chapter 9 in Neural Network Methods for Natural Language Processing by Yoav Goldberg](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Language%20Model/Goldberg_ch9_Language%20Model.pdf)
+- Materials: [Chapter 9 in Neural Network Methods for Natural Language Processing by Yoav Goldberg](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Notes/2.%20Language%20Model/Goldberg_ch9_Language%20Model.pdf)
 ## Motivation
 - Q1: How to decide which sentence is natural, which is not? Or how to judge a sentence is good or not?
 Ans: possibility, to evaluate a sentence by calculating its possibility
@@ -72,7 +72,7 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
           
     
     - Model Details
-    ![image](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Language%20Model/taglm.png)
+    ![image](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Notes/2.%20Language%20Model/taglm.png)
         - char-CNN: mitigate OOV
         - stacked bi-LSTM
         - tie parameter in token representation and Softmax layer in the forward and backward directions
@@ -92,7 +92,7 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
         - Text-pair classification, which determines whether sentence A is followed by sentence B, semantically or logically
         - When choosing the sentences A and B for each pretraining example, 50% of the time B is the actual next sentence that follows A, and 50% of the time it is a random sentence from the corpus.
     - Model Details
-    ![](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Language%20Model/bert.png)
+    ![](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Notes/2.%20Language%20Model/bert.png)
         - WordPiece embeddings
         - learned positional embeddings
         - Stacked Tranformer encoder
