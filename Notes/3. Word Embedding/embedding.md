@@ -98,14 +98,16 @@ A:  Possible solutions
         - Stacked Tranformer encoder
         - Trained with masked LM and next sentence prediction
     - What does BERT learn?
-            - BERT Rediscovers the Classical NLP Pipeline (ACL2019): BERT represents the steps of the traditional NLP pipeline in an interpretable and localizable way, and that the regions responsible for each step appear in the expected sequence: POS tagging, parsing, NER, semantic roles, then coreference. Qualitative analysis reveals that the model can and often does adjust this pipeline dynamically, revising lower level decisions on the basis of disambiguating information from higher-level representations.
-            - What Does BERT Look At? An Analysis of BERT’s Attention: certain attention heads correspond well to linguistic notions of syntax and coreference. For example, we find heads that attend to the direct objects of verbs, determiners of nouns, objects of prepositions, and coreferent mentions with remarkably high accuracy. Substantial **syntactic** information is captured in BERT’s attention.
-An Analysis of BERT’s Attention
-     ![](./figs/learn.png){width="400px" height="250px" align="center"}
-        
- - [GPT] (Generative Pre-Training)
- ![](./figs/GPT.png){width="450px" height="250px" align="center"}
-     - Zero shot learning
+        - BERT Rediscovers the Classical NLP Pipeline (ACL2019): BERT represents the steps of the traditional NLP pipeline in an interpretable and localizable way, and that the regions responsible for each step appear in the expected sequence: POS tagging, parsing, NER, semantic roles, then coreference. Qualitative analysis reveals that the model can and often does adjust this pipeline dynamically, revising lower level decisions on the basis of disambiguating information from higher-level representations.
+        - What Does BERT Look At? An Analysis of BERT’s Attention: certain attention heads correspond well to linguistic notions of syntax and coreference. For example, we find heads that attend to the direct objects of verbs, determiners of nouns, objects of prepositions, and coreferent mentions with remarkably high accuracy. Substantial **syntactic** information is captured in BERT’s attention.
+![](./figs/learn.png){width="400px" height="250px" align="center"}
+- [GPT] (Generative Pre-Training)
+![](./figs/GPT.png){width="450px" height="250px" align="center"}
+    - Zero shot learning
+    	- Reading Comprehension: using "Q: $q_{1}$, $q_{2}$..." and "A:"
+    	- Summarization: using "TL;DR:"
+    	- Translation: using "="
+     		
 
 
 ## Useful Links
