@@ -29,13 +29,22 @@ A:  Possible solutions
 ## Basic Methods
 - **Count-based Methods**: create a word-context count matrix
 ![](./figs/count_based1.png){width="500px" height="200px" align="center"}
-
+	- Distributional properties of words using word-context matrices, im which each row $i$ represents a word, each column $j$ represents a linguistic context in which words can occur, and a matrix $M_{[i, j]}$ quantifies the strength of association between a word and a context in a large corpus.
+	- Different definitions of contexts and different ways of measuring the association between a word and a context give rise to **different word representations**
+	- More formally, denote by $V_{W}$ the set of words (vocab size) and by $V_{C}$ the set of possible contexts. The matrix $M^{f} \in R^{|V_{W}| x |V_{C}|}$ is the word-context matrix, defined as $M_{[i, j]}^{f} = f(w_{i}, c_{j})$, where $f$ is an association measure of the strength between a word and a context.
+	- $f$ is usually based on counts from a large corpus, an effective metric is the *pointwise mutual information (PMI)*: an information-theoretic association measure between a pair of discrete outcomes $x$ and $y$, defined as: ![](./figs/PMI1.png).
+	- PMI(w, c) measures the association between a word w and a context c by calculating the log of the ratio between their joint probability (the frequency in which they cooccur together) and their marginal (the frequencies in which they occur individually). PMI can be estimated by (|D| is the corpus size): ![](./figs/PMI2.png).
+	- The use of PMI as a measure of association in NLP was widely adopted for word similarity and distributional semantic tasks.
+	- For word-context pairs (w, c) that were never observed in the corpus, PMI(w, c) = log0 = -infinity. A common solution is to use the *positive PMI (PPMI)* metric, in which all negative values are replaced by 0: ![](./figs/PPMI.png).
+	
 *Problems*:
 	- matrix size increases with vocab;
 	- high dimensional, sparsity;
 *Solution*: get the low dimensional word vector by using *SVD* of co-occurrence matrix.
 
 ![](./figs/count_based2.png){width="500px" height="200px" align="center"}
+
+*SVD*: works by *factorizing* the matrix $M$ into 2 narrow matrices: a **word matrix** $W$ and a **context matrix** $C$, such that $WC^{T} = M^{prime}$ is the best rank-$d$ approximation of $M$ in the sense that no other rank-$d$ matrix has a closer $L_{2}$ distance to $M$ than $M^{prime}$. $M^{prime}$ can be seen as a **"smoothed"** version of $M$. 
 
 *Problems*:
 	- computationally expensive;
@@ -66,7 +75,17 @@ A:  Possible solutions
 		- **Subsampling**: For each word we encounter in our training text, there is a chance that we will effectively delete it from the text. The probability that we cut the word is related to the word’s frequency.
 		- **Negative Sampling**: each training sample to update only a small percentage of the model’s weights. Previously, each training sample will tweak all of the weights in the neural network, our skip-gram neural network has a tremendous number of weights, all of which would be updated slightly by every one of our billions of training samples! 
 		- Example: when training the network on the word pair (“fox”, “quick”), recall that the “label” or “correct output” of the network is a one-hot vector. That is, for the output neuron corresponding to “quick” to output a 1, and for all of the other thousands of output neurons to output a 0.  With negative sampling, we are instead going to randomly select just a small number of “negative” words (let’s say 5) to update the weights for. (“negative”: is one for which we want the network to output a 0 for). We will also still update the weights for our “positive” word (which is the word “quick” in our current example). The **“negative samples”** are selected using a **“unigram distribution”**, where more frequent words are more likely to be selected as negative samples.
+		
+- Math: 
+	- Goal: estimate the probability P(D=1 | w, c) that the word-context pair came from the correct set D. This should be 1 for pairs from D and 0 from incorrect set D^{tilda}. The probability constraint dictates that P(D=1 | w, c) = 1 - P(D=0 | w, c). The probability function is modeled as a sigmoid over the score s(w, c): ![](./figs/NS1.png).
+	- The corpus-wide objective of the algorithm is to maximize the log-likelihood of the data D uniton D^{tilda}:![](./figs/NS2.png)
+	- The postive examples D are generated from a corpus. For each good pair (w, c) \in D, sample k words W_{1:k} and add each of (w_{i}, c) as a negative example to D^{tilda}. This results in the negative samples data k times larger than D.
+	- CBOW: the context vector c is a sum of the embedding vectors of the context components c = sum i to k for c_{i}. Then we defines the score to be simple s(w, c) = w . c, resulting in: ![](./figs/CBOW.png)
+	- Skip-Gram: for a k-elements context c_{1:k},  assumes that the elements $c_{i}$ in the context are independent form each other, essentially treating them as k different contexts. The score function s(w, c) is defined as:![](./figs/skip-gram.png)
+	
+- **Connections**:![](./figs/connection.png)
 
+	
 
 - **Glove** (Pennington et al., EMNLP 2014)
 	- Motivation: Both CBOW and Skip-Grams only take **local contexts** into account. These context window-based methods suffer from the disadvantage of not learning from the global corpus statistics. As a result, repetition and large-scale patterns may not be learned as well with these models as they are with **global matrix factorization**.  **GloVe** by contrast leverage the same intuition behind the co-occuring matrix used distributional embeddings, but uses neural methods to decompose the co-occurrence matrix into more expressive and dense word vectors. 
