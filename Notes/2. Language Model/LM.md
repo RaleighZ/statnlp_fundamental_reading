@@ -17,7 +17,8 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
 - [Markov Property](https://en.wikipedia.org/wiki/Markov_property)
 - [Entropy Rate]()
     - the **entropy rate** of a [stochastic process](https://en.wikipedia.org/wiki/Stochastic_process "Stochastic process") is, informally, the time density of the average information in a stochastic process.
-    - ![](https://latex.codecogs.com/gif.latex?H(X)&space;=&space;\lim_{n&space;\to&space;\infty}&space;\frac{1}{n}&space;H(X_1,&space;X_2,&space;\dots&space;X_n))
+    - ![](https://latex.codecogs.com/gif.latex?H_R(X)&space;=&space;\lim_{n&space;\to&space;\infty}&space;\frac{1}{n}&space;H(X_1,&space;X_2,&space;\dots&space;X_n)) where H(.) is entropy
+    - Related details can be found in [link](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Notes/2.%20Language%20Model/perplexity_issues.pdf)
 - [Cross Entropy](https://en.wikipedia.org/wiki/Cross_entropy): 
     - ![](https://latex.codecogs.com/gif.latex?H(p,q)=\operatorname&space;{E}&space;_{p}[-\log&space;q])
     - In classification problems, maximizing the likelihood is the same as minimizing the cross entropy.
@@ -32,7 +33,7 @@ Ans: possibility, to evaluate a sentence by calculating its possibility
     - Calculate perplexity (the lower, the better) on the evaluation corpus
     - **The equvalence of perplexity and cross entropy**
         - Language as a stochastic model, use entropy rate to measure the uncertainty
-        - Perplexity is equal to entropy rate
+        - Perplexity is equal to entropy rate [(link)](https://github.com/RaleighZ/statnlp_fundamental_reading/blob/master/Notes/2.%20Language%20Model/perplexity_issues.pdf)
 - n-gram LM
     
     - N-order Markov Assumption: ![](https://latex.codecogs.com/gif.latex?P\left(w_{i&plus;1}&space;|&space;w_{1&space;:&space;i}\right)&space;\approx&space;P\left(w_{i&plus;1}&space;|&space;w_{i-n&space;:&space;i}\right))
