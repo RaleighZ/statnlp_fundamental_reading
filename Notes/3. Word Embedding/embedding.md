@@ -44,11 +44,15 @@ A:  Possible solutions
 
 - **Prediction-based Methods**: try to *predict* the words within a NN. Word embeddings are the byproduct.
 
--**Word2Vec** (Mikolov et al, NIPS 2013): **Skip-Gram** and **CBOW**
-	-*Skip-Gram* vs *CBOW*: **Skip-Gram** predicts surrounding words within a window of each word, while **CBOW** predicts the target word given the surrounding words.
-![](./figs/word2vec.jpg){width="500px" height="300px" align="center"}
+## Word2Vec
+- **Word2Vec** (Mikolov et al, NIPS 2013): **Skip-Gram** and **CBOW**
+	- *Skip-Gram* vs *CBOW*: 
+		- **Skip-Gram** predicts surrounding words within a window of each word, while **CBOW** predicts the target word given the surrounding words. ![](./figs/word2vec.jpg){width="500px" height="300px" align="center"}
+		- **Skip-Gram** works well with *small* amount of the training data, represents well even *rare* words or phrases. *CBOW* serveral times *faster* to train than the skip-gram, slightly better accuracy for the *frequent* words.
+		- In CBOW the vectors from the context words are averaged before predicting the center word.  The model can learn better representations for the rare words when their vectors are not averaged with the other context words. Rare words will be smoothed over a lot of examples with more frequent words.
+		- In skipgram algorithm: context words are predicted and loss is calculated based on the predictions. In cbow algorithm: only one prediction is done and loss is calculated based on prediction of the center word.
 	
--**Skip-Gram**: Here is an example for how to collect the training sets. The network is probably going to get many more training samples of (“Soviet”, “Union”) than it is of (“Soviet”, “Sasquatch”). When the training is finished, if you give it the word “Soviet” as input, then it will output a much higher probability for “Union” or “Russia” than it will for “watermelon” or “kangaroo”.
+- **Skip-Gram**: Here is an example for how to collect the training sets. The network is probably going to get many more training samples of (“Soviet”, “Union”) than it is of (“Soviet”, “Sasquatch”). When the training is finished, if you give it the word “Soviet” as input, then it will output a much higher probability for “Union” or “Russia” than it will for “watermelon” or “kangaroo”.
 ![](./figs/running_example.jpg){width="500px" height="300px" align="center"}
 	- Model Architecture: There is **no activation function** on the hidden layer neurons, but the output neurons use softmax. 
 	![](./figs/arch.png){width="500px" height="300px" align="center"}
@@ -65,6 +69,9 @@ A:  Possible solutions
 
 
 - **Glove** (Pennington et al., EMNLP 2014)
+	- Motivation: Both CBOW and Skip-Grams only take **local contexts** into account. These context window-based methods suffer from the disadvantage of not learning from the global corpus statistics. As a result, repetition and large-scale patterns may not be learned as well with these models as they are with **global matrix factorization**.  **GloVe** by contrast leverage the same intuition behind the co-occuring matrix used distributional embeddings, but uses neural methods to decompose the co-occurrence matrix into more expressive and dense word vectors. 
+	- Intuition: term-term frequency matrices encode how often terms appear in the context of one another. Performing matrix factorization gives us a low rank approximation of the whole of the data contained in the original matrix. GloVe discovered via empirical methods that instead of learning the raw co-occurrence probabilities, it may make more sense to learn **ratios** of these co-occurrence probabilities, which seem to **better discriminate subtleties in term-term relevance**.
+	- Method: We try to design a function which maps word vectors to **ratios of co-occurrence probabilities**. We have **two** word vectors which we’d like to **discriminate** between, and **a context word vector** which is used to this effect. Our naive model simply maps (using magic or whatever) the vectors right to these probabilities. 
 
 
 - **Word  Vector Evaluation**
@@ -112,5 +119,7 @@ A:  Possible solutions
 
 ## Useful Links
 1. 理解 Word2Vec 之 Skip-Gram 模型: https://zhuanlan.zhihu.com/p/27234078
-2. The Annotated Transformer: http://nlp.seas.harvard.edu/2018/04/03/attention.html
+2. Word2Vec数学推导： https://zhuanlan.zhihu.com/p/53425736
+3. What is GloVe: https://towardsdatascience.com/emnlp-what-is-glove-part-i-3b6ce6a7f970
+4. The Annotated Transformer: http://nlp.seas.harvard.edu/2018/04/03/attention.html
 
