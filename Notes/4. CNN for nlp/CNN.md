@@ -12,11 +12,11 @@ Let's start with CNN for image firstly and then transfer the related knowledge t
 
 Per pixel comparison is impractical for image classification. 
 
-![aaa](D:\cnn-fundemental\figs\ccn-image-1.png)*Fig.1. Comparing two images with 0 and 1 pixel values. The right two pictures show that their share some similar local features*
+![aaa](./figs/ccn-image-1.png)*Fig.1. Comparing two images with 0 and 1 pixel values. The right two pictures show that their share some similar local features*
 
 Convolutional Neural Networks is able to capture these local features by **filters**, which is also called **kerne**l or **feature detector**.  Here is a detailed demonstration and three filers are defined.
 
-![cnn-image-2](D:\cnn-fundemental\figs\cnn-image-2.png)
+![cnn-image-2](./figs/cnn-image-2.png)
 
 
 
@@ -26,11 +26,11 @@ Activation functions , then max pooling.
 
 
 
-![ccn-image-3](D:\cnn-fundemental\figs\ccn-image-3.png)
+![ccn-image-3](./figs/ccn-image-3.png)
 
 
 
-![cnn-image-3](D:\cnn-fundemental\figs\cnn-image-3.png)
+![cnn-image-3](./figs/cnn-image-3.png)
 
 
 
@@ -41,7 +41,7 @@ Activation functions , then max pooling.
 The CBOW vectors are unable to learn n-gram features, and
 Bag of n-grams suffers 1) <span style='color:red'> parameter explosion problem </span>and 2) <span style='color:red'> sharing among similar words/n-grams problem </span>.
 
-![ccn-nlp-2](D:\cnn-fundemental\figs\ccn-nlp-2.png)
+![ccn-nlp-2](./figs/ccn-nlp-2.png)
 
 **A: CNN is able to learn n-gram features with shared filters **
 
@@ -57,27 +57,27 @@ Bag of n-grams suffers 1) <span style='color:red'> parameter explosion problem <
 
 
 
-![actiation-2](D:\cnn-fundemental\figs\actiation-2.png)
+![actiation-2](./figs/actiation-2.png)
 
 Narrow convolution VS wide convolution:
 
-![narrrow-wide](D:\cnn-fundemental\figs\narrrow-wide.png)
+![narrrow-wide](./figs/narrrow-wide.png)
 
 ### A General llustration 
 
 
 
-![ccn-nlp-1](D:\cnn-fundemental\figs\ccn-nlp-1.png)*llustration of a Convolutional Neural Network (CNN) architecture for sentence classification. Here we depict three filter region sizes: 2, 3 and 4, each of which has 2 filters. Every filter performs convolution on the sentence matrix and generates (variable-length) feature maps. Then 1-max pooling is performed over each map, i.e., the largest number from each feature map is recorded*
+![ccn-nlp-1](./figs/ccn-nlp-1.png)*llustration of a Convolutional Neural Network (CNN) architecture for sentence classification. Here we depict three filter region sizes: 2, 3 and 4, each of which has 2 filters. Every filter performs convolution on the sentence matrix and generates (variable-length) feature maps. Then 1-max pooling is performed over each map, i.e., the largest number from each feature map is recorded*
 
 ## CNN Variants:
 
 ### Stack CNN
 
-![stack-cnn](D:\cnn-fundemental\figs\stack-cnn.png)
+![stack-cnn](./figs/stack-cnn.png)
 
 ### Structure CNN
 
-![structure-cnn](D:\cnn-fundemental\figs\structure-cnn.png)
+![structure-cnn](./figs/structure-cnn.png)
 
 ### SOTA
 
@@ -91,7 +91,7 @@ Narrow convolution VS wide convolution:
 
 - Dropout plays an important role for the performance.
 
-  ![sent-classfication](D:\cnn-fundemental\figs\sent-classfication.png)
+  ![sent-classfication](./figs/sent-classfication.png)
 
 **[2] A Convolutional Neural Network for Modelling Sentences**
 
@@ -103,7 +103,7 @@ Narrow convolution VS wide convolution:
   $$
   
 
-  ![DCNN](D:\cnn-fundemental\figs\DCNN.png)
+  ![DCNN](./figs/DCNN.png)
 
   **[3]Is it Time to Swish? Comparing Deep Learning Activation Functions Across NLP tasks**-EMNLP2018
 
@@ -124,7 +124,7 @@ Narrow convolution VS wide convolution:
 
   **[5] Encoding Sentences with Graph Convolutional Networks for Semantic Role Labeling**-EMNLP 2017.
 
-  ![strcuture-cnn2](D:\cnn-fundemental\figs\strcuture-cnn2.png)
+  ![strcuture-cnn2](./figs/strcuture-cnn2.png)
 
     
 
