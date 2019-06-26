@@ -8,11 +8,11 @@
 
 Per pixel comparison is impractical for image classification. 
 
-![aaa](D:\cnn-fundemental\figs\ccn-image-1.png)*Fig.1. Comparing two images with 0 and 1 pixel values. The right two pictures show that their share some similar local features*
+![aaa](./figs/ccn-image-1.png)*Fig.1. Comparing two images with 0 and 1 pixel values. The right two pictures show that their share some similar local features*
 
 Convolutional Neural Networks is able to capture these local features by **filters**, which is also called **kerne**l or **feature detector**.  Here is a detailed demonstration and three filers are defined.
 
-![cnn-image-2](D:\cnn-fundemental\figs\cnn-image-2.png)
+![cnn-image-2](./figs/cnn-image-2.png)
 
 
 
@@ -22,7 +22,7 @@ Activation functions , then max pooling.
 
 
 
-![ccn-image-3](D:\cnn-fundemental\figs\ccn-image-3.png)
+![ccn-image-3](./figs/ccn-image-3.png)
 
 
 
