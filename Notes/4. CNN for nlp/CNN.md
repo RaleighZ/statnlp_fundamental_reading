@@ -66,7 +66,7 @@ Narrow convolution VS wide convolution:
 ![narrrow-wide](./figs/narrrow-wide.png)
 
 ### A General llustration 
-
+There is a 1D CNN with 6 filers. 1D indicates that convoluation performed along the squence in words level and the output of convolutons on sentence by each filer is a vector (the output of 2D CNN is a matrix). Each value in the output vector represents the feature of a word-level n-gram, eg, for the 4X5 filer, the output vector contains the features of "I like this movie", "like this movie very", "this movie very much", and "movie very much!". 
 
 
 ![ccn-nlp-1](./figs/ccn-nlp-1.png)*llustration of a Convolutional Neural Network (CNN) architecture for sentence classification. Here we depict three filter region sizes: 2, 3 and 4, each of which has 2 filters. Every filter performs convolution on the sentence matrix and generates (variable-length) feature maps. Then 1-max pooling is performed over each map, i.e., the largest number from each feature map is recorded*
@@ -74,6 +74,8 @@ Narrow convolution VS wide convolution:
 ## CNN Variants:
 
 ### Stack CNN
+
+The higher level of stack CNN can capture longer range relations. Note that no pooling is performed between each convolution layer.
 
 ![stack-cnn](./figs/stack-cnn.png)
 
@@ -128,6 +130,9 @@ Narrow convolution VS wide convolution:
 
   ![strcuture-cnn2](./figs/strcuture-cnn2.png)
 
+### Dicussion:
+1. why the 1D convolution works?
+2. 
 ### To be done:
 -Add additional intro of dynamic pooling
 -Add Fair sequence
