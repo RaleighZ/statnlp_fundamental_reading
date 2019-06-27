@@ -38,8 +38,10 @@ Activation functions , then max pooling.
 
 **Q: Why we need CNN for NLP**
 
-The CBOW vectors are unable to learn n-gram features, and
-Bag of n-grams suffers 1) <span style='color:red'> parameter explosion problem </span>and 2) <span style='color:red'> sharing among similar words/n-grams problem </span>.
+Bag of Word (BoW) or Contineous Bag of Word (CBoW) vectors operates all word embeddings without considering their positions, while an n-gram feature contains the position information for the words in segmentation. Hence, The CBOW vectors are unable to learn n-gram features.
+
+Bag of n-gram enumulates all combinations of contineous words and may cause **parameter explosion** problem and could not 
+share among similar words/n-grams problem </span>.
 
 ![ccn-nlp-2](./figs/ccn-nlp-2.png)
 
@@ -47,11 +49,11 @@ Bag of n-grams suffers 1) <span style='color:red'> parameter explosion problem <
 
 ## CNN for NLP
 
-**-Filters**: can be 1D or 2D, in word unit or across word
+**-Filters**: can be 1D or 2D in word unit (1D) or across word (2D).
 
-**-Pooling**:  max pooling, average pooling, k-Max pooling, dynamic pooling.
+**-Pooling**: for extracting sailent features. Pooling includes max pooling, average pooling, k-Max pooling, dynamic pooling, etc. it will lead to the loss of words' positional information.
 
-**-Channels**:  different pre-trained word vectors
+**-Channels**:  different pre-trained word vectors.
 
 -**Activation Function**: See the summary below.
 
@@ -126,7 +128,10 @@ Narrow convolution VS wide convolution:
 
   ![strcuture-cnn2](./figs/strcuture-cnn2.png)
 
-    
+### To be done:
+-Add additional intro of dynamic pooling
+-Add Fair sequence
+-Add Dialated CNN
 
 ### Useful link
 [1] Understanding Convolutional Neural Networks for NLP http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
