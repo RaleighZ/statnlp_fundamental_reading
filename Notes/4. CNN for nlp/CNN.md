@@ -138,7 +138,7 @@ The higher level of stack CNN can capture longer range relations. Note that no p
 -Add Fair sequence
 -Add Dialated CNN
 -Sensitive Analysis
-  A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification
+  (A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification)
 
 ### Useful link
 [1] Understanding Convolutional Neural Networks for NLP http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
