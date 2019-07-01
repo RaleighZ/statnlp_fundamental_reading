@@ -43,7 +43,7 @@ In practice, we learn the kernel by looking at the (input, output) pairs only. W
 	
 - **Pooling:** dual purpose"
 	- **Mitigate the sensitivity of convolutional layers to location:** in reality, objects hardly ever occur exactly at the same place. Assume in edge detection, the conv layer input is X and the pooling output is Y. Whether or not the values of X[i, j] and X[i, j+1] are different, or X[i, j+1] and X[i, j+2] are different, the max pooling (2 x 2) layer outputs all include Y[i, j]=1. We can still detect if the pattern recognized by the conv layer moves no more than 1 element in height and width.
-	- **Spatially Downsample:** as we process images, we want to gradually reduce the spatial resolution of our hidden representations, aggregating information so that the higher up we go in the network, the larger the **receptive field**  to which each hidden node is sensitive. By gradually aggregating information, yielding coarser and coarser maps, we accomplish this goal of ultimately learning a global representation, while keeping all of the advantages of convolutional layers at the intermediate layers of processing.
+	- **Spatially Downsample:** as we process images, we want to gradually reduce the spatial resolution of our hidden representations, aggregating information so that the higher up we go in the network, the larger the **receptive field**  to which each hidden node is sensitive. 
 
 - **1 x 1 Convolutional Layer:** 1 X 1 convolution loses the ability to recognize patterns consisting of interactions among adjacent elements in the height and width dimensions. **The only computation of the 1 x 1 convolution occurs on the channel dimension**
 ![](./figs/1by1.png){width="500px",  height="200px", align="center"}.
@@ -63,13 +63,13 @@ Each element in the output is derived from a linear combination of elements *at 
 
 - **AlexNet**: (Krizhevsky, A., Sutskever, I., & Hinton, G. E. NIPS2012. Imagenet classification with deep convolutional neural networks. ) between the early 1990s and 2012, NNs were often surpassed by other machine learning methods, such as SVM.
 	- **Manual Features**:
-		- Pipeline: typical CV pipelines consisted of **manually engineering feature**. Rather than **learn** the features, the features were **crafted**. Most of the progress came from having more clever ideas for **features** (SIFT: the Scale-Invariant Feature Transform,  SURF: the Speeded-Up Robust Features,), rather than the learning algorithm.
-		- NNs are hard to Train: key tricks for training deep multichannel, multilayer convolutional neural networks with a large number of parameters including **parameter initialization** heuristics, clever variants of **stochastic gradient descent**, **non-squashing activation** functions, and effective **regularization** techniques were still missing.
+		- **Pipeline**: typical CV pipelines consisted of **manually engineering feature**. Rather than **learn** the features, the features were **crafted**. Most of the progress came from having more clever ideas for **features** (SIFT: the Scale-Invariant Feature Transform,  SURF: the Speeded-Up Robust Features,), rather than the learning algorithm.
+		- **NNs are hard to Train**: key tricks for training deep multichannel, multilayer convolutional neural networks with a large number of parameters including **parameter initialization** heuristics, clever variants of **stochastic gradient descent**, **non-squashing activation** functions, and effective **regularization** techniques were still missing.
 	- **Learning Features**:  Yann LeCun, Geoff Hinton, Yoshua Bengio ... believed that features themselves ought to be learned. They ought to be hierarchically composed with multiple jointly learned layers, each with learnable parameters. 
 		- CNN: In the case of an image, the lowest layers might come to *detect edges, colors, and textures*. Interestingly in the **lowest layers of the network**, the model learned **feature extractors that resembled some traditional filters**.
 	![](./figs/1la.png){width="300px",  height="200px", align="center"}
 	**Higher layers** in the network might build upon these representations to represent **larger structures**, like eyes, noses, blades of grass, etc. Even higher layers might represent **whole objects** like people, airplanes, dogs, or frisbees. Ultimately, the final hidden state learns a compact representation of the image that summarizes its contents.
-		- Breakthrough at 2012: can be attributed to two key factors data and hardware. ImageNet: 1 million examples, 1,000 each from 1,000 distinct categories of objects. GPUs: they were optimized for high throughput 4x4 matrix-vector products, which are needed for many computer graphics tasks (games). Fortunately, this math is strikingly similar to that required to calculate convolutional layers. People: Alex Krizhevsky and Ilya Sutskever implemented a deep CNNs that could run on GPU. The computational bottlenecks in CNNs (convolutions and matrix multiplications) are all operations that could be parallelized in hardware ( 2 NIVIDA GTX 580s with 3GB of memory)
+		- **Breakthrough at 2012**: can be attributed to two key factors data and hardware. **ImageNet**: 1 million examples, 1,000 each from 1,000 distinct categories of objects. **GPUs**: they were optimized for high throughput 4x4 matrix-vector products, which are needed for many computer graphics tasks (games). Fortunately, this math is strikingly similar to that required to calculate convolutional layers. **People**: Alex Krizhevsky and Ilya Sutskever implemented a deep CNNs that could run on GPU. The computational bottlenecks in CNNs (convolutions and matrix multiplications) are all operations that could be parallelized in hardware ( 2 NIVIDA GTX 580s with 3GB of memory)
 	- **Arch**: first filter is 11×11, since objects in ImageNet data tend to occupy more pixels. Consequently, a larger convolution window is needed to capture the object. The network adds maximum pooling. AlexNet has ten times more convolution channels than LeNet. Last are two fully-connected layers with 4096 outputs. These two huge layers produce model parameters of nearly 1 GB. AlexNet used a dual data stream design, so that each of their two GPUs could be responsible for storing and computing only its half of the model. 
 	![](./figs/alexnet.png){width="300px",  height="400px", align="center"}
 	- **ReLU**: when the output of the sigmoid is very close to **0 or 1**, the **gradient** of these regions is almost 0, so that back propagation cannot continue to update some of the model parameters. In contrast, the gradient of the ReLU activation function in the **positive interval is always 1**.
@@ -81,18 +81,18 @@ Each element in the output is derived from a linear combination of elements *at 
 ![](./figs/ens.png){width="300px",  height="200px", align="center"}
 
 - **VGG**: (Simonyan, K., & Zisserman, A. ICLR2015. Very deep convolutional networks for large-scale image recognition.) 
-	- Motivation: the design of NN architectures had grown progressively more abstract, with researchers moving from thinking in terms of **individual neurons to whole layers, and now to blocks**, repeating patterns of layers.
-	- Block: One VGG block consists of a sequence of convolutional layers, followed by a max pooling layer for spatial downsampling.
+	- **Motivation**: the design of NN architectures had grown progressively more abstract, with researchers moving from thinking in terms of **individual neurons to whole layers, and now to blocks**, repeating patterns of layers.
+	- **Block**: One VGG block consists of a sequence of convolutional layers, followed by a max pooling layer for spatial downsampling.
 	![](./figs/vgg.png){width="300px",  height="350px", align="center"}
-	- Variants: VGG constructs a network using reusable convolutional blocks. Different VGG models can be defined by the differences in the number of convolutional layers and output channels in each block.
+	- **Variants**: VGG constructs a network using reusable convolutional blocks. Different VGG models can be defined by the differences in the number of convolutional layers and output channels in each block.
 	![](./figs/vggall.png){width="300px",  height="350px", align="center"}
 	- **Deeper Other than Wider**: several layers of deep and narrow convolutions (i.e.  3×3 ) were more effective than fewer layers of wider convolutions.
 
 - **NiN**: (Lin, M., Chen, Q., & Yan, S. ICLR2014. Network in network)
-	- Motivation: The improvements upon LeNet by AlexNet and VGG mainly lie in how these later networks widen and deepen convolutions and pooling layers. . **Dense layers** might give up the **spatial structure of the representation entirely**, NiN blocks offer an alternative. They use an MLP on the channels for each pixel separately. 1×1 卷积层可以看成全连接层，其中空间维度（高和宽）上的每个元素相当于样本，通道相当于特征。因此，NiN使用 1×1 卷积层来替代全连接层，从而使空间信息能够自然传递到后面的层中去。
-	- Arch: The NiN block consists of one convolutional layer followed by two  1×1  convolutional layers that act as per-pixel fully-connected layers with ReLU activations.
+	- **Motivation**: The improvements upon LeNet by AlexNet and VGG mainly lie in how these later networks widen and deepen convolutions and pooling layers. . **Dense layers** might give up the **spatial structure of the representation entirely**, NiN blocks offer an alternative. They use an MLP on the channels for each pixel separately. 1×1 卷积层可以看成全连接层，其中空间维度（高和宽）上的每个元素相当于样本，通道相当于特征。因此，NiN使用 1×1 卷积层来替代全连接层，从而使空间信息能够自然传递到后面的层中去。
+	- **Arch**: The NiN block consists of one convolutional layer followed by two  1×1  convolutional layers that act as per-pixel fully-connected layers with ReLU activations.
 	![](./figs/nin.png){width="300px",  height="400px", align="center"}
-	- Advantage: significantly reduces the number of required model parameters,  since NiN block with a number of output channels equal to the number of label classes, followed by a global average pooling layer, yielding a vector of logits
+	- **Advantage**: significantly reduces the number of required model parameters,  since NiN block with a number of output channels equal to the number of label classes, followed by a global average pooling layer, yielding a vector of logits
 sequential1 output shape:        (1, 96, 54, 54)
 pool0 output shape:      (1, 96, 26, 26)
 sequential2 output shape:        (1, 256, 26, 26)
@@ -106,10 +106,10 @@ flatten0 output shape:   (1, 10)
 	 
 
 - **GoogleNet**: (Szegedy, C., Liu, W., Jia, Y., Sermanet, P., Reed, S., & Anguelov, D. & Rabinovich, A. CVPR2015. Going deeper with convolutions.) They want to address the question of which sized convolutional kernels are best. 
-	- Motivation: sometimes it can be advantageous to employ a combination of variously-sized kernels. 
-	- Arch: The basic convolutional block in GoogLeNet is called an Inception block, likely named due to a quote from the movie Inception
+	- **Motivation**: sometimes it can be advantageous to employ a combination of variously-sized kernels. 
+	- **Arch**: The basic convolutional block in GoogLeNet is called an Inception block, likely named due to a quote from the movie Inception
 	![](./figs/googlenet.png){width="600px",  height="300px", align="center"}
-	- Combination of Kernels: inception block consists of four parallel paths. The first three paths use convolutional layers extract information from different spatial sizes. The 1×1  convolution on the input to reduce the number of input channels, reducing the model’s complexity. Finally, the outputs along each path are concatenated along the channel dimension and comprise the block’s output. The commonly-tuned parameters of the Inception block are **the number of output channels per layer**.
+	- **Combination of Kernels**: inception block consists of four parallel paths. The first three paths use convolutional layers extract information from different spatial sizes. The 1×1  convolution on the input to reduce the number of input channels, reducing the model’s complexity. Finally, the outputs along each path are concatenated along the channel dimension and comprise the block’s output. The commonly-tuned parameters of the Inception block are **the number of output channels per layer**.
 		- Inception: equivalent to a subnetwork with four paths.
 		- 1x1 Conv: reduce channel dimensionality on a per-pixel level.
 		- advantage: one of the **most efficient** models on ImageNet, providing similar test accuracy with lower computational complexity.
