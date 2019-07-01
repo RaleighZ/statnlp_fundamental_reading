@@ -88,9 +88,31 @@ Each element in the output is derived from a linear combination of elements *at 
 	![](./figs/vggall.png){width="300px",  height="350px", align="center"}
 	- **Deeper Other than Wider**: several layers of deep and narrow convolutions (i.e.  3×3 ) were more effective than fewer layers of wider convolutions.
 
-- **NiN**
+- **NiN**: (Lin, M., Chen, Q., & Yan, S. ICLR2014. Network in network)
+	- Motivation: The improvements upon LeNet by AlexNet and VGG mainly lie in how these later networks widen and deepen convolutions and pooling layers. . **Dense layers** might give up the **spatial structure of the representation entirely**, NiN blocks offer an alternative. They use an MLP on the channels for each pixel separately. 1×1 卷积层可以看成全连接层，其中空间维度（高和宽）上的每个元素相当于样本，通道相当于特征。因此，NiN使用 1×1 卷积层来替代全连接层，从而使空间信息能够自然传递到后面的层中去。
+	- Arch: The NiN block consists of one convolutional layer followed by two  1×1  convolutional layers that act as per-pixel fully-connected layers with ReLU activations.
+	![](./figs/nin.png){width="300px",  height="400px", align="center"}
+	- Advantage: significantly reduces the number of required model parameters,  since NiN block with a number of output channels equal to the number of label classes, followed by a global average pooling layer, yielding a vector of logits
+sequential1 output shape:        (1, 96, 54, 54)
+pool0 output shape:      (1, 96, 26, 26)
+sequential2 output shape:        (1, 256, 26, 26)
+pool1 output shape:      (1, 256, 12, 12)
+sequential3 output shape:        (1, 384, 12, 12)
+pool2 output shape:      (1, 384, 5, 5)
+dropout0 output shape:   (1, 384, 5, 5)
+sequential4 output shape:        (1, 10, 5, 5)
+pool3 output shape:      (1, 10, 1, 1)
+flatten0 output shape:   (1, 10)
+	 
 
-- **GoogleNet**
+- **GoogleNet**: (Szegedy, C., Liu, W., Jia, Y., Sermanet, P., Reed, S., & Anguelov, D. & Rabinovich, A. CVPR2015. Going deeper with convolutions.) They want to address the question of which sized convolutional kernels are best. 
+	- Motivation: sometimes it can be advantageous to employ a combination of variously-sized kernels. 
+	- Arch: The basic convolutional block in GoogLeNet is called an Inception block, likely named due to a quote from the movie Inception
+	![](./figs/googlenet.png){width="600px",  height="300px", align="center"}
+	- Combination of Kernels: inception block consists of four parallel paths. The first three paths use convolutional layers extract information from different spatial sizes. The 1×1  convolution on the input to reduce the number of input channels, reducing the model’s complexity. Finally, the outputs along each path are concatenated along the channel dimension and comprise the block’s output. The commonly-tuned parameters of the Inception block are **the number of output channels per layer**.
+		- Inception: equivalent to a subnetwork with four paths.
+		- 1x1 Conv: reduce channel dimensionality on a per-pixel level.
+		- advantage: one of the **most efficient** models on ImageNet, providing similar test accuracy with lower computational complexity.
 
 - **ResNet**
 
@@ -101,8 +123,5 @@ Each element in the output is derived from a linear combination of elements *at 
 
 
 ## Useful Links
-1. 理解 Word2Vec 之 Skip-Gram 模型: https://zhuanlan.zhihu.com/p/27234078
-2. Word2Vec数学推导： https://zhuanlan.zhihu.com/p/53425736
-3. What is GloVe: https://towardsdatascience.com/emnlp-what-is-glove-part-i-3b6ce6a7f970
-4. The Annotated Transformer: http://nlp.seas.harvard.edu/2018/04/03/attention.html
+
 
