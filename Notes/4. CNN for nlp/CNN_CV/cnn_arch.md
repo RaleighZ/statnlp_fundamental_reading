@@ -52,11 +52,41 @@ Each element in the output is derived from a linear combination of elements *at 
 
 ## CNN Architectures
 
-- **LeNet**
+- **LeNet**: (LeCun, Y., Bottou, L., Bengio, Y., & Haffner, P. (1998). Gradient-based learning applied to document recognition. Proceedings of the IEEE): LeNet was the first successful deployment of CNN, a network using convolutional layers. Their model achieved outstanding results at the time (only matched by SVM) and was adopted to recognize digits for processing deposits in ATM machines.![](./figs/lenet.png){width="500px",  height="200px", align="center"}
+	- **Arch**: recognize the spatial patterns in the image, such as lines and the parts of objects, and the subsequent average pooling layer is used to reduce the dimensionality. 
+	- **Conv Layer**: Each convolutional layer uses a  5×5  kernel and processes each output with a sigmoid activation function (again, note that ReLUs are now known to work more reliably, but had not been invented yet).
+	- **Pooling Layer**:  two average pooling layers are of size  2×2  and take stride 2 (note that this means they are non-overlapping). In other words, the pooling layer downsamples the representation to be precisely one quarter the pre-pooling size.
+	- **Fully-Connected Layer**: flatten each example in the mini-batch. Take this 4D input and tansform it into the 2D input expected by fully-connected layers.
+	![](./figs/leg.png){width="100px",  height="200px", align="center"}
 
-- **AlexNet**
 
-- **VGG**
+
+- **AlexNet**: (Krizhevsky, A., Sutskever, I., & Hinton, G. E. NIPS2012. Imagenet classification with deep convolutional neural networks. ) between the early 1990s and 2012, NNs were often surpassed by other machine learning methods, such as SVM.
+	- **Manual Features**:
+		- Pipeline: typical CV pipelines consisted of **manually engineering feature**. Rather than **learn** the features, the features were **crafted**. Most of the progress came from having more clever ideas for **features** (SIFT: the Scale-Invariant Feature Transform,  SURF: the Speeded-Up Robust Features,), rather than the learning algorithm.
+		- NNs are hard to Train: key tricks for training deep multichannel, multilayer convolutional neural networks with a large number of parameters including **parameter initialization** heuristics, clever variants of **stochastic gradient descent**, **non-squashing activation** functions, and effective **regularization** techniques were still missing.
+	- **Learning Features**:  Yann LeCun, Geoff Hinton, Yoshua Bengio ... believed that features themselves ought to be learned. They ought to be hierarchically composed with multiple jointly learned layers, each with learnable parameters. 
+		- CNN: In the case of an image, the lowest layers might come to *detect edges, colors, and textures*. Interestingly in the **lowest layers of the network**, the model learned **feature extractors that resembled some traditional filters**.
+	![](./figs/1la.png){width="300px",  height="200px", align="center"}
+	**Higher layers** in the network might build upon these representations to represent **larger structures**, like eyes, noses, blades of grass, etc. Even higher layers might represent **whole objects** like people, airplanes, dogs, or frisbees. Ultimately, the final hidden state learns a compact representation of the image that summarizes its contents.
+		- Breakthrough at 2012: can be attributed to two key factors data and hardware. ImageNet: 1 million examples, 1,000 each from 1,000 distinct categories of objects. GPUs: they were optimized for high throughput 4x4 matrix-vector products, which are needed for many computer graphics tasks (games). Fortunately, this math is strikingly similar to that required to calculate convolutional layers. People: Alex Krizhevsky and Ilya Sutskever implemented a deep CNNs that could run on GPU. The computational bottlenecks in CNNs (convolutions and matrix multiplications) are all operations that could be parallelized in hardware ( 2 NIVIDA GTX 580s with 3GB of memory)
+	- **Arch**: first filter is 11×11, since objects in ImageNet data tend to occupy more pixels. Consequently, a larger convolution window is needed to capture the object. The network adds maximum pooling. AlexNet has ten times more convolution channels than LeNet. Last are two fully-connected layers with 4096 outputs. These two huge layers produce model parameters of nearly 1 GB. AlexNet used a dual data stream design, so that each of their two GPUs could be responsible for storing and computing only its half of the model. 
+	![](./figs/alexnet.png){width="300px",  height="400px", align="center"}
+	- **ReLU**: when the output of the sigmoid is very close to **0 or 1**, the **gradient** of these regions is almost 0, so that back propagation cannot continue to update some of the model parameters. In contrast, the gradient of the ReLU activation function in the **positive interval is always 1**.
+	- **Dropout**: 可以约束网络复杂度，还是一种针对NN的ensemble learning. 由于神经元互联，对于某个神经元来说，反向传播的梯度信息同时也受到其他神经元的影响，即是complex cp-adaptation effect. Dropout可以降低神经元之间的以来，避免了overfitting。
+		- Train: 以概率p随机将该神经元权重置为0。
+		- Test: 所有神经元激活，但权重需要乘以(1-p)来保证training and testing各自权重拥有相同的expectation。
+		- Ensemble: 由于失活的神经元无法参与训练，所有每次训练（forward and backward）相当于面对一个全新的网络。对于AlexNet和VGG的fully-connected layers来说，dropout之后就是指数级exponentially
+子网络的网络集成。	
+![](./figs/ens.png){width="300px",  height="200px", align="center"}
+
+- **VGG**: (Simonyan, K., & Zisserman, A. ICLR2015. Very deep convolutional networks for large-scale image recognition.) 
+	- Motivation: the design of NN architectures had grown progressively more abstract, with researchers moving from thinking in terms of **individual neurons to whole layers, and now to blocks**, repeating patterns of layers.
+	- Block: One VGG block consists of a sequence of convolutional layers, followed by a max pooling layer for spatial downsampling.
+	![](./figs/vgg.png){width="300px",  height="350px", align="center"}
+	- Variants: VGG constructs a network using reusable convolutional blocks. Different VGG models can be defined by the differences in the number of convolutional layers and output channels in each block.
+	![](./figs/vggall.png){width="300px",  height="350px", align="center"}
+	- **Deeper Other than Wider**: several layers of deep and narrow convolutions (i.e.  3×3 ) were more effective than fewer layers of wider convolutions.
 
 - **NiN**
 
