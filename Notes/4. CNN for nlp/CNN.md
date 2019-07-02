@@ -131,17 +131,23 @@ The higher level of stack CNN can capture longer range relations. Note that no p
   ![strcuture-cnn2](./figs/strcuture-cnn2.png)
 
 ### Dicussion:
-1. why the 1D convolution works?
-2. 
-### To be done:
--Add additional intro of dynamic pooling
--Add Fair sequence
--Add Dialated CNN
--Sensitive Analysis
-  (A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification)
+
+1. what is 1x1 convolution layer ?  1x1 conv layer is able to combine multiple channels into a single channel to reduce network parameters. See discussions at https://github.com/RaleighZ/statnlp_fundamental_reading/issues/14
+
+### MISC:
+
+-Dynamic pooling: K-max pooling makes it possible to pool the k most active features, and it is is the generalization of max pooling. It RETAINs the order of features but it insensitive to their specific positions. See details for the paper "A Convolutional Neural Network for Modelling Sentences" https://www.aclweb.org/anthology/P14-1062
+
+- Fair sequence:
+
+- Dialated CNN: 
+
+- Parameter settings for sentence classification task: **max pooling** performs best among pooling approaches. A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification) https://aclweb.org/anthology/I17-1026
 
 ### Useful link
 [1] Understanding Convolutional Neural Networks for NLP http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
 
 [2] 卷积神经网络CNN完全指南终极版（一） https://zhuanlan.zhihu.com/p/27908027
+
+[3] 从CNN视角看在自然语言处理上的应用 https://zhuanlan.zhihu.com/p/30268946
 
