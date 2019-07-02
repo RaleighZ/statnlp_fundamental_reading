@@ -136,13 +136,19 @@ The higher level of stack CNN can capture longer range relations. Note that no p
 
 ### MISC:
 
--Dynamic pooling: K-max pooling makes it possible to pool the k most active features, and it is is the generalization of max pooling. It RETAINs the order of features but it insensitive to their specific positions. See details for the paper "A Convolutional Neural Network for Modelling Sentences" https://www.aclweb.org/anthology/P14-1062
+- Dynamic pooling: K-max pooling makes it possible to pool the k most active features, and it is is the generalization of max pooling. It RETAINs the order of features but it insensitive to their specific positions. See details for the paper "A Convolutional Neural Network for Modelling Sentences" https://www.aclweb.org/anthology/P14-1062
 
 - Fair sequence:
 
 - Dialated CNN: 
 
 - Parameter settings for sentence classification task: **max pooling** performs best among pooling approaches. A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification) https://aclweb.org/anthology/I17-1026
+
+###Other popular CNN papers 
+[1]Event Detection and Domain Adaptation with Convolutional Neural Networks https://www.aclweb.org/anthology/P15-2060
+
+[2] Neural Machine Translation in Linear Time https://arxiv.org/pdf/1610.10099.pdf
+
 
 ### Useful link
 [1] Understanding Convolutional Neural Networks for NLP http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
