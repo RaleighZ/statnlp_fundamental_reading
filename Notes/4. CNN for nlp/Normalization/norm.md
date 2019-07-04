@@ -5,10 +5,10 @@ by zhijiang
 - Jimmy Lei Ba, Jamie Ryan Kiros, Geoffrey E. Hinton Layer Normalization
 
 ## Motivation
-- **Training DNN is Comlicated:** the inputs to each layer are affected by the parameters of **all preceding layers** -- so that small changes to the network parameters amplify as the network become deeper (蝴蝶效应).
+- **Training DNN is Complicated:** the inputs to each layer are affected by the parameters of **all preceding layers** -- so that small changes to the network parameters amplify as the network become deeper (蝴蝶效应).
 - **Covariate Shift:** (from Domain Adaptation) when the input distribution to a learning system changes. The change in the distributions of layers' inputs presents a problem because the layers need to **continously adapt to the new distribution.**
 - **Internal Covariate Shift:** change in the distribution of network activations due to the change in network parameters during training.
-- **理解：**随着梯度下降的进行，每一层的参数W与b都会被更新，那么z=Wx+b的分布也就发生了改变，进而A_{l} = F(z)也同样出现分布的改变。而A_{l}作为第l=1层的输入，意味着l+1层就需要去不停适应这种数据分布的变化
+- **理解：** 随着梯度下降的进行，每一层的参数W与b都会被更新，那么z=Wx+b的分布也就发生了改变，进而A_{l} = F(z)也同样出现分布的改变。而A_{l}作为第l=1层的输入，意味着l+1层就需要去不停适应这种数据分布的变化
 
 ## Problems
 - **上层网络需要不停调整来适应输入数据分布的变化，导致网络学习速率降低**；
