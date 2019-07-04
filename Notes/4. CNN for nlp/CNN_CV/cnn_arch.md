@@ -114,7 +114,74 @@ flatten0 output shape:   (1, 10)
 		- 1x1 Conv: reduce channel dimensionality on a per-pixel level.
 		- advantage: one of the **most efficient** models on ImageNet, providing similar test accuracy with lower computational complexity.
 
-- **ResNet**
+- **Highway Networks:** (Rupesh Kumar Srivastava, Klaus Greff, Jurgen Schmidhuber, Training Very Deep Networks, NIPS2015) 
+	- **Motivation**: allow unimpeded information flow across many layers on information highways. They are inspired by LSTM and use adaptive gating units to regulate the information flow. Even with 100 layers, highway networks can be trained directly through simple GD.
+	- **Math**: plain feedforward neural network:
+	![](./figs/h1.png){width="200px",  height="80px", align="center"}
+	Highway network:
+	![](./figs/h2.png){width="400px",  height="80px", align="center"}
+	![](./figs/h6.png){width="200px",  height="40px", align="center"}
+		- **Transfer Gate:** T, express how much of the output is produced by transforming the input.
+		- **Carry Gate:** C, express how much of the output is produced by carrying the input.
+		- **Initialization:**: b_{T} can be initialized with a negative value (e.g. -1, -3 etc.) such that the network is initially biased towards **carry** behavior. This scheme is strongly inspired by initializing bias of the gates in LSTM, to help bridge long-term temporal dependencies early in learning. Note that 0<H<1.
+	We can simplify it by setting C = 1 - T:
+	![](./figs/h3.png){width="400px",  height="80px", align="center"}
+	![](./figs/h4.png){width="400px",  height="100px", align="center"}
+	![](./figs/h5.png){width="400px",  height="100px", align="center"}
+	- **Experiment:**随着层数的增加， bias逐渐增加，浅层的strong negtive bias是让更多的信息直接pass，使得深层网络可以更多的进行处理。
+
+- **ResNet**(He, K., Zhang, X., Ren, S., & Sun, J. CVPR2016. Deep residual learning for image recognition.)
+	- **Motivation:** adding layers doesn’t make the network more expressive.
+	![](./figs/resarch.png){width="600px",  height="200px", align="center"}
+	our model has fewer filters and lower complexity than VGG nets. Our 34-
+layer baseline has 3.6 billion FLOPs (multiply-adds), which is only 18% of VGG-19 (19.6 billion FLOPs).
+	- **Key Concept:** F, F`, f, f`
+	![](./figs/res1.png){width="400px",  height="200px", align="center"}
+	**Only if** larger function class F` **contain** the smaller ones F are we guaranteed that increasing them strictly increases the expressive power of the network.
+	- **Heart of ResNet:** every additional layer should contain the **identity function** as one of its elements. If we can train the newly-added layer into an identity mapping f(x) = x, the new model will be **as efffective as** the original model. As the new model **may get a better solution** to fit the training data set, the added layer might make it easier to reduce training errors.
+	- **Block**: left one directly fit the mapping f(x), right one now **only needs to parametrize the deviation from the identity**. If we dont need that particular layer and we can retain the input x. In practice, the residual mapping is easier to optimize. y = f(x) + x, residual: f(x) = y - x
+		- Bottleneck Residual Block: 令卷积在相对较低维度的输入上进行，提高计算效率。
+	![](./figs/bo.png){width="400px",  height="150px", align="center"}
+	![](./figs/comp.png){width="600px",  height="300px", align="center"}
+	- **Intuition:** 
+		- **Why ResNet better than Highway Networks?**: 
+			- He: These gates are data-dependent and have parameters, in contrast to our identity shortcuts that are parameter-free. When a gated shortcut is “closed” (approaching zero), the layers in highway networks represent non-residual functions.  In addition, high-way networks have not demonstrated accuracy gains with extremely increased depth.
+			- ResNet能够学习到对合适的数据进行复杂的transform，不需要gate进行scale。既然不需要gate的scale，那就没必要用gate机制。而且gate近似函数不了复杂的函数（单层sigmod)，所以泛化较低，性能相对比residual差。
+			
+
+- **ResNetV2:**(He, K., Zhang, X., Ren, S., & Sun, J. ECCV2016. Identity Mappings in Deep Residual Networks.)
+	- **Motivation:** the forward and backward signals can be directly propagated from one block to any other block, when using identity mappings as the skip connections and after-addition activation.
+	![](./figs/v2exp.jpg){width="600px",  height="200px", align="center"}
+	- **Identity Mapping:**
+	![](./figs/v2f1.png){width="600px",  height="300px", align="center"}
+	![](./figs/v2f2.png){width="600px",  height="300px", align="center"}
+	for **any deeper unit L and any shallow unit l**, the feature x_{L} of any deeper unit L can be represented as the feature x_{l} of any shallower unit l + residual function in a form of Sigma(F), indicating that the model is in a **residual fashion between any units L and l**
+	![](./figs/v21.jpg){width="600px",  height="200px", align="center"}
+	These experiments suggest that keeping a **clean** information path is helpful for easing optimization.
+	![](./figs/v22.jpg){width="600px",  height="200px", align="center"}
+	To construct identity mapping f(yl) = yl, we view the activation functions (ReLU and BN) as **pre-activation** of the weight legyers, in contrast to conventional **post-activation**
+	
+	
+- **ResNetXt:** (S. Xie, R. Girshick, P. Dollar, Z. Tu and K. He. Aggregated Residual Transformations for Deep Neural Networks. CVPR2017)
+	- **Motivation:**:increasing cardinality is more effective than going deeper or
+wider when we increase the capacity.
+	![](./figs/xt.jpg){width="600px",  height="200px", align="center"}
+	
+- **Why ResNet Works?**
+	- **Identity Mapping:** ResNetV1, 在某些层执行恒等变换是一种构造性解，使更深的模型的性能至少不低于较浅的模型。
+	- **Gradient Diffusion:** ResNetV2，残差网络使信息更容易在各层之间流动，包括在前向传播时提供特征重用，在反向传播时缓解梯度信号消失。
+	- **Ensembles of Relatively Shallow Networks** (A. Veit, M. Wilber and S. Belongie. Residual Networks Behave Like Ensembles of Relatively Shallow Networks, NIPS2016).
+	
+	![](./figs/resens.jpg){width="600px",  height="200px", align="center"}
+		- Ensemble: 在我们展开网络架构之后，很明显发现，一个有着 i 个残差块的 ResNet 架构有 2**i 个不同路径（因为每个残差块提供两个独立路径）。ResNet 中不同路径的集合有类似集成的行为。
+	![](./figs/resens2.jpg){width="600px",  height="200px", align="center"}
+		- Remove Layers: 移除 ResNet 架构中的部分层对其性能影响不大，因为架构具备许多独立有效的路径，在移除了部分层之后大部分路径仍然保持完整无损。相反，VGG 网络只有一条有效路径，因此移除一个层会对该层的唯一路径产生影响。
+		- Insight: 大多数对梯度的贡献来自于长度为 9 到 18 的路径，但它们只占所有路径的一小部分，这是一个非常有趣的发现，它表明 ResNet 并没有解决长路径的梯度消失问题，而是通过缩短有效路径的长度训练非常深层的 ResNet 网络。可以理解为这是一种自适应深度，也就是网络可以自己调节层数的深浅，不需要太深时，中间恒等映射就多，需要时恒等映射就少
+	- **Deep Networks with Stochastic Depth** (G. Huang, Y. Sun, Z. Liu, D. Sedra and K. Q. Weinberger. Deep Networks with Stochastic Depth. ECCV2016).在训练期间，当特定的残差块被启用，它的输入就会同时流经恒等快捷连接和权重层；否则，就只流过恒等快捷连接。训练时，每层都有一个「生存概率」，每层都有可能被随机丢弃。在测试时间内，所有的块都保持被激活状态，并根据其生存概率进行重新校准。
+		- 路径冗余： 同样是训练一个 110 层的 ResNet，随机深度训练出的网络比固定深度的性能要好，同时大大减少了训练时间。这意味着 ResNet 中的一些层（路径）可能是冗余的。
+		- Insight： 训练随机深度的深度网络可被视为训练许多较小 ResNet 的集合， 将线性衰减规律应用于每一层的生存概率，他们表示，由于较早的层提取的低级特征会被后面的层使用，所以不应频繁丢弃较早的层。不同之处在于，上述方法随机丢弃一个层，而 Dropout 在训练中只丢弃一层中的部分隐藏单元。
+	
+
 
 - **DenseNet**
 
