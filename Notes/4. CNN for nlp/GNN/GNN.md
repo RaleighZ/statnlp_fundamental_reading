@@ -62,7 +62,7 @@ Or treat self-connection in the same way.
 
 ## Propogation Steps
 
-![gnn-progation steps](figs/gnn-progation steps.png)
+![gnn-progation steps](figs/gnn-progation-steps.png)
 
 ## Variants of GCN
 
@@ -80,7 +80,7 @@ For details Please refer to Table of of paper [2] Graph Nerual Networks: A revie
 
 **Insights: A linear model (SGC) is sufficient on many graph tasks.**
 
-![SGC](../../reading%20group/gnn/figs/SGC.png)
+![SGC](figs/SGC.png)
 
 SGC performan on par with or better than GCN across 5 tasks including 14 datasets for graph classification, text classification, semi-supervised user geolocation, relation extraction and zero-shot image classification.
 
@@ -107,35 +107,4 @@ Motivation:  to model non-local  context relations for capturing  **long-range d
 [1]Graph Convolution Networks:  <https://tkipf.github.io/graph-convolutional-networks/>  by Thomas Kipf
 
 [2]Graph Nerual Networks: A review of methods and Applications.<https://arxiv.org/pdf/1812.08434.pdf>
-
-
-
-
-
-
-$$
-h^{l+1}_i = \sigma (h^l_i W^l_0  + \sum_{j \in N_i} \frac{1}{c_{ij}} h^l_j W^l_1 + b^l)
-\\
-H^{l+1} = \sigma (H^l W^l_0 + \widetilde{A}H^lW^l_1 + b^l)
-\\
-\widetilde{A} = D^{-1/2} A D^{-1/2}
-\\
-
-H^{l+1} = \sigma (\widetilde{A} H^l W^l + b^l)
-\\
-\hat{A} = D^{-1/2} (A + I_N) D^{-1/2}
-$$
-
-$$
-_{ij}} h^l_j W^l_1 + b^l)
-\\
-H^{l+1} = \sigma (H^l W^l_0 + \widetilde{A}H^lW^l_1 + b^l)
-\\
-\widetilde{A} = D^{-1/2} A D^{-1/2}
-\\
-
-H^{l+1} = \sigma (\widetilde{A} H^l W^l + b^l)
-\\
-\hat{A} = D^{-1/2} (A + I_N) D^{-1/2}
-$$
 
