@@ -1,8 +1,8 @@
 by guoshun
 
-##Motivation
+## Motivation
 
-**CNN is unable to  handle non-Euclidean data by shared tunable kernels, While GNN can operate on graph domain. Let's see the details of why we use GNN **
+**CNN is unable to  handle non-Euclidean data by shared tunable kernels, While GNN can operate on graph domain. Let's see the details of why we use GNN**
 
 Firstly, let's see the convolutionals on Euclidean data (grids, sequences). The update for sequences by RNN and grids by CNN can be formulated as. 
 
