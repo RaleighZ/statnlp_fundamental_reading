@@ -62,7 +62,7 @@ Or treat self-connection in the same way.
 
 ## Propogation Steps
 
-![gnn-progation steps](figs/gnn-progation-steps.png)
+![gnn-progation](figs/gnn-progation.png)
 
 ## Variants of GCN
 
