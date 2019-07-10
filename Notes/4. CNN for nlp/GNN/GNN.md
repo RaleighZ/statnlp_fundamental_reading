@@ -1,6 +1,6 @@
 by guoshun
 
-##Motivation
+## Motivation
 
 **CNN is unable to  handle non-Euclidean data by shared tunable kernels, While GNN can operate on graph domain. Let's see the details of why we use GNN **
 
@@ -105,7 +105,7 @@ For details Please refer to Table of of paper [2] Graph Nerual Networks: A revie
    2. Gating machanism is able to alliviate Laplacian smoothing of GCN. "Tu et al. Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs, ACL 2019"
    3. From the gradient viewpoint, GCN can be deeper with highway connections between layers referring to **ResNet** and **Densenet**
 
-   ![over-smoothing](../../reading%20group/gnn/figs/over-smoothing.png)
+   ![over-smoothing](figs/over-smoothing.png)
 
    
 
