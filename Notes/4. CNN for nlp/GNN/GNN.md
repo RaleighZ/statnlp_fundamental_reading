@@ -1,8 +1,8 @@
 by guoshun
 
-## Motivation
+##Motivation
 
-**CNN is unable to  handle non-Euclidean data by shared tunable kernels, While GNN can operate on graph domain. Let's see the details of why we use GNN**
+**CNN is unable to  handle non-Euclidean data by shared tunable kernels, While GNN can operate on graph domain. Let's see the details of why we use GNN **
 
 Firstly, let's see the convolutionals on Euclidean data (grids, sequences). The update for sequences by RNN and grids by CNN can be formulated as. 
 
@@ -24,7 +24,11 @@ Obviously we can not use RNN or CNN directly to model graph data. Let's give the
 
 ### Question:
 
-Can we feed the GCN network into deep FFN and what are the problems?   
+1. Can we feed the GCN network into deep FFN and what are the problems ?   
+
+2. What are the relations between GCN, CNN and RNN ? Can GCN be more superior than tree-LSTM? 
+
+   
 
 Let's X_{in} = [X, A] denote the input of deep FNN, X and A indicate feature matrix and ajacent matrix, respectively.  The problems are:
 
@@ -52,25 +56,66 @@ Or treat self-connection in the same way.
 
 ![gnn-def-5](figs/gnn-def-5.png)
 
-## Variants of GNN:
+## Graph Types:
 
-***Directed graphs***: 
+***Directed graphs***: There is a relation between two nodes. For example,  in a knowledge graph where teh edge starts form the head entity and ends at the tail entity.  
 
-***Heterogeneous graphs***:  there are several kinds of nodes and each type of nodes is converted into a one-hot feature. 
+Undirected edge can be treated as two directed edges, like graph constructed by dependency tree in relation extraction in "Zhang et al. Graph Convolution over Pruned Dependency Trees Improves Relation Extraction, EMNLP 2018". 
 
-***Graphs with edge information***: Relational GCN
+***Heterogeneous graphs***:  There are several kinds of nodes and each type of nodes is converted into a one-hot feature, for example, "Tu et al. Multi-hop Reading Comprehension across Multiple Documents by
+Reasoning over Heterogeneous Graphs, ACL 2019"
+
+***Graphs with edge information***: Two ways to handle this graph: further splitting and relational-GCN, which uses different type of edges.
+
+![relational-GCN](figs/relational-GCN.png)
 
 ## Propogation Steps
 
 ![gnn-progation](figs/gnn-progation.png)
 
-## Variants of GCN
+1. Convolutional aggreator: 
 
-The variants of GNN include GCN, GCNN, GAT, Gated GNN, Graph LSTM, and the main difference lies in their aggregator. 
+2. Attention aggregator: 
 
-For details Please refer to Table of of paper [2] Graph Nerual Networks: A review of methods and Applications 
+3. Spectral methods: 
 
+4. Spatial methods:
 
+   
+
+## Variants of GNN
+
+The variants of GNN include GCN,  GAT, Gated GNN and Graph LSTM, and the main difference lies in their aggregator and updater.
+
+- Aggregator:  Gathering information from other nodes
+
+- Updater:  Updating node's hidden states
+
+  
+
+For details Please refer to Table of of paper [2] Graph Nerual Networks: A review of methods and Applications.
+
+![gcn-category](figs/gcn-category.png)
+
+## Further Questions:
+
+1. Can GCN be trained very deep without over-smoothing caused by many convolution layers ?
+
+   1. Thoretically, GCN model is actually is a special form of Laplacian smoothing, and repeatly applying the smoothing will cause  each node **converge to the same values** :  Deeper Insights into Graph Convolutional Networksfor Semi-Supervised Learning, AAAI 2019.
+   2. Gating machanism is able to alliviate Laplacian smoothing of GCN. "Tu et al. Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs, ACL 2019"
+   3. From the gradient viewpoint, GCN can be deeper with highway connections between layers referring to **ResNet** and **Densenet**
+
+   ![over-smoothing](../../reading%20group/gnn/figs/over-smoothing.png)
+
+   
+
+2. How GCN handles the long-range depency problem?
+
+   1. Dependency-Tree
+
+   2. Graph-LSTM
+
+      
 
 ## SOTA
 
@@ -83,8 +128,6 @@ For details Please refer to Table of of paper [2] Graph Nerual Networks: A revie
 ![SGC](figs/SGC.png)
 
 SGC performan on par with or better than GCN across 5 tasks including 14 datasets for graph classification, text classification, semi-supervised user geolocation, relation extraction and zero-shot image classification.
-
-
 
 [2] Position-aware Graph Neural Networks, ICML 2019
 
