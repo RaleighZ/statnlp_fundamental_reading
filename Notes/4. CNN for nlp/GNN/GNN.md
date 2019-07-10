@@ -121,7 +121,7 @@ For details Please refer to Table of of paper [2] Graph Nerual Networks: A revie
 
 [1] Simplifying Graph Convolutional Networks (SGC), ICML 2019
 
-***Motivatin***: can we reduce the excess complexity and redundant computation of GCN?
+***Motivation***: can we reduce the excess complexity and redundant computation of GCN?
 
 **Insights: A linear model (SGC) is sufficient on many graph tasks.**
 
