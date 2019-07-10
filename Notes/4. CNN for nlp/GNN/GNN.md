@@ -10,11 +10,11 @@ Firstly, let's see the convolutionals on Euclidean data (grids, sequences). The 
 
 
 
-Here is a demostration of 3X3 convolution on grid data and the udpate:
+Here is a demostration of 3X3 convolution on grid data and the udpate [1]:
 
 ## ![cnn-motivation](figs/cnn-motivation.png)
 
-What if our data looks like this? such as data from social networks, word-wild-web, knowledge graphs, telecommunication network. Can we still use RNN or CNN as a convolution operator?
+What if our data looks like this [1] ? such as data from social networks, word-wild-web, knowledge graphs, telecommunication network. Can we still use RNN or CNN as a convolution operator?
 
 ![gnn-motivation2](figs/gnn-motivation2.png)
 
@@ -30,7 +30,9 @@ Obviously we can not use RNN or CNN directly to model graph data. Let's give the
 
    
 
-Let's X_{in} = [X, A] denote the input of deep FNN, X and A indicate feature matrix and ajacent matrix, respectively.  The problems are:
+Let's X_{in} = [X, A] denote the input of deep FNN, X and A indicate feature matrix and ajacent matrix, respectively.  The problems are[1]:
+
+![gnn-mlp](figs/gnn-mlp.png)
 
 - Huge number of parameters O(N), N indicates the length of feature matrix.
 
@@ -65,11 +67,13 @@ Undirected edge can be treated as two directed edges, like graph constructed by 
 ***Heterogeneous graphs***:  There are several kinds of nodes and each type of nodes is converted into a one-hot feature, for example, "Tu et al. Multi-hop Reading Comprehension across Multiple Documents by
 Reasoning over Heterogeneous Graphs, ACL 2019"
 
-***Graphs with edge information***: Two ways to handle this graph: further splitting and relational-GCN, which uses different type of edges.
+***Graphs with edge information***: Two ways to handle this graph: further splitting and relational-GCN, which uses different type of edges [3].
 
 ![relational-GCN](figs/relational-GCN.png)
 
 ## Propogation Steps
+
+This Figure is copied from [2].
 
 ![gnn-progation](figs/gnn-progation.png)
 
@@ -93,7 +97,7 @@ The variants of GNN include GCN,  GAT, Gated GNN and Graph LSTM, and the main di
 
   
 
-For details Please refer to Table of of paper [2] Graph Nerual Networks: A review of methods and Applications.
+For details please refer to Table2  of paper [2] Graph Nerual Networks: A review of methods and Applications.
 
 ![gcn-category](figs/gcn-category.png)
 
@@ -105,7 +109,7 @@ For details Please refer to Table of of paper [2] Graph Nerual Networks: A revie
    2. Gating machanism is able to alliviate Laplacian smoothing of GCN. "Tu et al. Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs, ACL 2019"
    3. From the gradient viewpoint, GCN can be deeper with highway connections between layers referring to **ResNet** and **Densenet**
 
-   ![over-smoothing](figs/over-smoothing.png)
+   ![over-smoothing](../../reading%20group/gnn/figs/over-smoothing.png)
 
    
 
@@ -121,7 +125,7 @@ For details Please refer to Table of of paper [2] Graph Nerual Networks: A revie
 
 [1] Simplifying Graph Convolutional Networks (SGC), ICML 2019
 
-***Motivation***: can we reduce the excess complexity and redundant computation of GCN?
+***Motivatin***: can we reduce the excess complexity and redundant computation of GCN?
 
 **Insights: A linear model (SGC) is sufficient on many graph tasks.**
 
@@ -147,7 +151,9 @@ Motivation:  to model non-local  context relations for capturing  **long-range d
 
 ## Useful Link
 
-[1]Graph Convolution Networks:  <https://tkipf.github.io/graph-convolutional-networks/>  by Thomas Kipf
+[1] Graph Convolution Networks :  <https://tkipf.github.io/graph-convolutional-networks/>  by Thomas Kipf, ICLR 2017.
 
-[2]Graph Nerual Networks: A review of methods and Applications.<https://arxiv.org/pdf/1812.08434.pdf>
+[2] Graph Nerual Networks: A review of methods and Applications.<https://arxiv.org/pdf/1812.08434.pdf> by Jie Zhou, and Maosong Sun.
+
+[3] Modeling Relational Data with Graph Convolutional Networks, <https://arxiv.org/pdf/1703.06103.pdf>, by Michael Schlichtkrull, and MaxWelling, *European Semantic Web Conference*. Springer, Cham, 2018
 
