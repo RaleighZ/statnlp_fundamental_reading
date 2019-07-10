@@ -109,7 +109,7 @@ For details please refer to Table2  of paper [2] Graph Nerual Networks: A review
    2. Gating machanism is able to alliviate Laplacian smoothing of GCN. "Tu et al. Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs, ACL 2019"
    3. From the gradient viewpoint, GCN can be deeper with highway connections between layers referring to **ResNet** and **Densenet**
 
-   ![over-smoothing](../../reading%20group/gnn/figs/over-smoothing.png)
+   ![over-smoothing](figs/over-smoothing.png)
 
    
 
